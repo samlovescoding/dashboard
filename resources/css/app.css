@@ -2,3 +2,6 @@
     top: 48px;
     right: 0px;
 }
+.nk-sidebar-menu-scrollable {
+    overflow-y: auto;
+}

@@ -4,8 +4,6 @@ import SidebarLink from "components/sidebar/link";
 import SidebarDropdown from "components/sidebar/dropdown";
 import { useTheme } from "components/theme";
 import sidebarData from "components/sidebar/data";
-import SimpleBar from "simplebar-react";
-import "simplebar-react/dist/simplebar.min.css";
 
 const Sidebar = () => {
     const { isOpen, isClosed, toggle } = useTheme("sidebar");
@@ -40,12 +38,10 @@ const Sidebar = () => {
             </div>
             <div className="nk-sidebar-element">
                 <div className="nk-sidebar-content">
-                    <div className="nk-sidebar-menu">
-                        <SimpleBar>
-                            <ul className="nk-menu">
-                                <SidebarItems />
-                            </ul>
-                        </SimpleBar>
+                    <div className="nk-sidebar-menu nk-sidebar-menu-scrollable">
+                        <ul className="nk-menu">
+                            <SidebarItems />
+                        </ul>
                     </div>
                 </div>
             </div>

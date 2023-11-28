@@ -1,3 +1,4 @@
+import { Head } from "@inertiajs/react";
 import Header from "components/header";
 import Sidebar from "components/sidebar";
 import { ThemeProvider } from "components/theme";
@@ -5,7 +6,9 @@ import { ThemeProvider } from "components/theme";
 const Layout = ({ children, title }: LayoutProps) => {
     return (
         <ThemeProvider>
-            <title>{title}</title>
+            <Head>
+                <title>{title}</title>
+            </Head>
             <div className="nk-app-root">
                 <div className="nk-main">
                     <Sidebar />

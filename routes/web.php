@@ -34,4 +34,8 @@ Route::middleware("auth")->group(function (){
     Route::get('/settings/profile', fn () => inertia('settings'));
     Route::get('/settings/account', fn () => inertia('settings'));
     Route::get('/settings/activity', fn () => inertia('settings'));
+
+
+    Route::get('/articles', fn () => inertia('articles/index'));
+    Route::get('/articles/create', fn () => inertia('articles/create'));
 });
