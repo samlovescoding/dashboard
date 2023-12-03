@@ -1,7 +1,7 @@
 import Layout from "components/layout";
 
 function Wishlist() {
-    return <Layout title="Wishlit">Wishlist Page</Layout>;
+    return <Layout title="Wishlist">Wishlist Page</Layout>;
 }
 
 export default Wishlist;
