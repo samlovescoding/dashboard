@@ -61,13 +61,13 @@ function Checkbox({
     );
 }
 
-interface CheckboxValue {
+export interface CheckboxValue {
     id: string;
     label: string;
     value: boolean;
 }
 
-interface CheckboxProps {
+export interface CheckboxProps {
     id: string;
     label: string;
     note?: string;
