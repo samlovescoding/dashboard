@@ -22,11 +22,18 @@ const sidebarData: Sidebar = [
         icon: "heart",
     },
     {
-        id: "link-finance-accounts",
+        id: "link-write",
         type: "link",
-        href: "/accounts",
-        children: "Accounts",
-        icon: "coins",
+        href: "/articles/create",
+        children: "Write",
+        icon: "edit-alt",
+    },
+    {
+        id: "link-pages",
+        type: "link",
+        href: "/articles",
+        children: "Pages",
+        icon: "file-docs",
     },
     {
         id: "dropdown-finance-transactions",

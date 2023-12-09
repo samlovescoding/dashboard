@@ -1,4 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
+import { IconType } from "components/icon";
 
 function SidebarLink({ href, children, icon, badge }: SidebarLinkProps) {
     const { url } = usePage();
@@ -23,7 +24,7 @@ function SidebarLink({ href, children, icon, badge }: SidebarLinkProps) {
 export interface SidebarLinkProps {
     href: string;
     children: React.ReactNode;
-    icon?: string;
+    icon?: IconType;
     badge?: string;
 }
 

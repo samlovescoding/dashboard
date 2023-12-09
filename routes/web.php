@@ -25,7 +25,6 @@ Route::get('/logout', [LogoutController::class, 'store']);
 Route::middleware("auth")->group(function (){
     Route::get('/', fn () => inertia('index'))->name("home");
     Route::get('/wishlist', fn () => inertia('wishlist'));
-    Route::get('/accounts', fn () => inertia('accounts'));
     Route::get('/transactions/income', fn () => inertia('transactions'));
     Route::get('/transactions/expense', fn () => inertia('transactions'));
     Route::get('/transactions/loan', fn () => inertia('transactions'));
