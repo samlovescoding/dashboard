@@ -21,7 +21,7 @@ const Select = ({
     multiple = false,
     ...selectProps
 }: SelectProps) => {
-    const [field, _meta, helpers] = useField(id);
+    const [field, meta, helpers] = useField(id);
 
     const value = multiple
         ? selectProps.options.filter((option) =>
@@ -36,14 +36,31 @@ const Select = ({
         helpers.setValue(updatedOption.value);
     };
 
+    const hasError = meta.touched && meta.error;
+    const borderFocusedColor = hasError ? "rgb(232, 83, 71)" : "#854fff";
+    const borderNormalColor = hasError ? "rgb(232, 83, 71)" : "#dbdfea";
+
     return (
         <div className="row g-3 align-center">
             <div className="col-lg-5">
                 <div className="form-group">
-                    <label className="form-label" htmlFor={id}>
+                    <label
+                        className={cx("form-label", {
+                            "text-danger": hasError,
+                        })}
+                        htmlFor={id}
+                    >
                         {label}
                     </label>
-                    {note && <span className="form-note">{note}</span>}
+                    {note && (
+                        <span
+                            className={cx("form-note", {
+                                "text-danger": hasError,
+                            })}
+                        >
+                            {note}
+                        </span>
+                    )}
                 </div>
             </div>
             <div className="col-lg-7">
@@ -58,15 +75,15 @@ const Select = ({
                                 control: (baseStyles, state) => ({
                                     ...baseStyles,
                                     borderColor: state.isFocused
-                                        ? "#854fff"
-                                        : "#dbdfea",
+                                        ? borderFocusedColor
+                                        : borderNormalColor,
                                     boxShadow: state.isFocused
                                         ? "0 0 0 3px rgba(133, 79, 255, 0.1);"
                                         : "none",
                                     ":hover": {
                                         borderColor: state.isFocused
-                                            ? "#854fff"
-                                            : "#dbdfea",
+                                            ? borderFocusedColor
+                                            : borderNormalColor,
                                         boxShadow: state.isFocused
                                             ? "0 0 0 3px rgba(133, 79, 255, 0.1);"
                                             : "none",
@@ -78,6 +95,11 @@ const Select = ({
                                 }),
                             }}
                         />
+                        {hasError && meta.error && (
+                            <small className={cx({ "text-danger": hasError })}>
+                                {meta.error}
+                            </small>
+                        )}
                     </div>
                 </div>
             </div>

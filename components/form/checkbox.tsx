@@ -7,6 +7,8 @@ function CheckboxElement({
     value: options,
     type = "checkbox",
     onChange,
+    hasError = false,
+    error = null,
 }: CheckboxElementProps) {
     const handleChange = (selectedOption) => () => {
         const selectedOptionId = selectedOption.id;
@@ -23,8 +25,22 @@ function CheckboxElement({
         <div className="row g-3 align-center">
             <div className="col-lg-5">
                 <div className="form-group">
-                    <label className="form-label">{label}</label>
-                    {note && <span className="form-note">{note}</span>}
+                    <label
+                        className={cx("form-label", {
+                            "text-danger": hasError,
+                        })}
+                    >
+                        {label}
+                    </label>
+                    {note && (
+                        <span
+                            className={cx("form-note", {
+                                "text-danger": hasError,
+                            })}
+                        >
+                            {note}
+                        </span>
+                    )}
                 </div>
             </div>
             <div className="col-lg-7">
@@ -58,6 +74,11 @@ function CheckboxElement({
                         </li>
                     ))}
                 </ul>
+                {hasError && error && (
+                    <small className={cx({ "text-danger": hasError })}>
+                        {error}
+                    </small>
+                )}
             </div>
         </div>
     );
@@ -76,6 +97,8 @@ export interface CheckboxElementProps {
     value?: Array<CheckboxValue>;
     type?: "checkbox" | "radio";
     onChange?: (value: Array<CheckboxValue>) => void;
+    error?: string | null;
+    hasError?: boolean;
 }
 
 export interface CheckboxProps {
@@ -91,7 +114,7 @@ const Checkbox = ({
     options: defaultOptions,
     ...checkboxProps
 }: CheckboxProps) => {
-    const [field, _meta, helpers] = useField(checkboxProps.id);
+    const [field, meta, helpers] = useField(checkboxProps.id);
 
     const isCheckbox = checkboxProps.type === "checkbox";
 
@@ -121,6 +144,8 @@ const Checkbox = ({
             {...checkboxProps}
             value={options}
             onChange={onChange}
+            error={meta.error}
+            hasError={meta.touched && !!meta.error}
         />
     );
 };

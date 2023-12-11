@@ -28,7 +28,7 @@ const validator = createValidator({
     "maintenance-mode": as.string().equals([true]),
     "base-url": as.string(),
     "allow-registration": as.string(),
-    "not-registration": as.string(),
+    "not-registration": as.array().of(yup.string()).min(1),
     select: as.array().of(as.string()).min(2),
 });
 
