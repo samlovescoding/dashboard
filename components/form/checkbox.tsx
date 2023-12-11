@@ -1,11 +1,13 @@
-function Checkbox({
+import { useField } from "formik";
+
+function CheckboxElement({
     id,
     label,
     note,
     value: options,
     type = "checkbox",
     onChange,
-}: CheckboxProps) {
+}: CheckboxElementProps) {
     const handleChange = (selectedOption) => () => {
         const selectedOptionId = selectedOption.id;
         const newOptions = options.map((option) => {
@@ -67,7 +69,7 @@ export interface CheckboxValue {
     value: boolean;
 }
 
-export interface CheckboxProps {
+export interface CheckboxElementProps {
     id: string;
     label: string;
     note?: string;
@@ -75,5 +77,52 @@ export interface CheckboxProps {
     type?: "checkbox" | "radio";
     onChange?: (value: Array<CheckboxValue>) => void;
 }
+
+export interface CheckboxProps {
+    id: string;
+    label: string;
+    note?: string;
+    options?: Array<Omit<CheckboxValue, "value">>;
+    value?: string;
+    type?: "checkbox" | "radio";
+}
+
+const Checkbox = ({
+    options: defaultOptions,
+    ...checkboxProps
+}: CheckboxProps) => {
+    const [field, _meta, helpers] = useField(checkboxProps.id);
+
+    const isCheckbox = checkboxProps.type === "checkbox";
+
+    const options = defaultOptions.map((option) => {
+        const radio = option.id === field.value;
+        const checkbox = field.value?.includes(option.id);
+        return { ...option, value: isCheckbox ? checkbox : radio };
+    });
+
+    const onChange = (updatedOptions) => {
+        if (isCheckbox) {
+            const selectedOptions = updatedOptions.filter(
+                (option) => option.value === true
+            );
+            helpers.setValue(selectedOptions.map((option) => option.id));
+            return;
+        }
+
+        const selectedOption = updatedOptions.find(
+            (option) => option.value === true
+        );
+        helpers.setValue(selectedOption.id);
+    };
+
+    return (
+        <CheckboxElement
+            {...checkboxProps}
+            value={options}
+            onChange={onChange}
+        />
+    );
+};
 
 export default Checkbox;

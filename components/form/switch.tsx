@@ -1,4 +1,6 @@
-function Switch({
+import { useField } from "formik";
+
+export function SwitchElement({
     id,
     note,
     label,
@@ -51,5 +53,15 @@ interface SwitchProps {
     value?: boolean;
     onChange?: (isChecked: boolean) => void;
 }
+
+const Switch = (switchProps: SwitchProps) => {
+    const [field, _meta, helpers] = useField(switchProps.id);
+
+    const value = field.value;
+    const onChange = (updatedValue) => {
+        helpers.setValue(updatedValue);
+    };
+    return <SwitchElement {...switchProps} value={value} onChange={onChange} />;
+};
 
 export default Switch;

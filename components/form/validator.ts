@@ -1,5 +1,9 @@
 import * as Yup from "yup";
 
-const validate = Yup;
+const validator = Yup;
 
-export default validate;
+export const createValidator = validator.object;
+
+export const as = validator;
+
+export default validator;
