@@ -25,7 +25,7 @@ const validator = createValidator({
     "site-name": as.string().required(),
     "site-email": as.string().email().required(),
     "site-copyright": as.string(),
-    "maintenance-mode": as.string().equals([true]),
+    "maintenance-mode": as.bool().oneOf([true], "You must accept this field."),
     "base-url": as.string(),
     "allow-registration": as.string(),
     "not-registration": as.array().of(yup.string()).min(1),
