@@ -1,5 +1,5 @@
 export default function Icon({ type, className = "" }: IconProps) {
-    return <em className={cx("ni", `ni-${type}`, className)} />;
+    return <em className={cx("icon", "ni", `ni-${type}`, className)} />;
 }
 
 interface IconProps {

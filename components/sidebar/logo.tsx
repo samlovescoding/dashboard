@@ -1,7 +1,7 @@
 function SidebarLogo() {
     return (
         <div className="nk-sidebar-brand">
-            <a href="html/index.html" className="logo-link nk-sidebar-logo">
+            <a href="/" className="logo-link nk-sidebar-logo">
                 <img
                     className="logo-light logo-img"
                     src="/assets/images/logo.png"
